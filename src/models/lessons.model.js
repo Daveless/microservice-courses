@@ -21,7 +21,7 @@ const Lessons = db.define('tests', {
     allowNull: false
   },
   resources: {
-    type: DataTypes.ARRAY,
+    type: DataTypes.ARRAY(DataTypes.STRING),
   },
 });
 
