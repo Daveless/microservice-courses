@@ -13,7 +13,7 @@ const Tests = db.define('tests', {
     allowNull: false,
   },
   content:{
-    type: DataTypes.ARRAY,
+    type: DataTypes.ARRAY(DataTypes.STRING),
     allowNull: false
   }
 });
