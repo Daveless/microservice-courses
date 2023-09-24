@@ -14,4 +14,4 @@ router
   .get(testsController.readTestsById)
   .patch(testsController.updateTests)
 
-Test.exports = router;
+  module.exports = router;
