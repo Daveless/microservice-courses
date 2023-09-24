@@ -14,4 +14,4 @@ router
   .get(lessonsController.readLessonsById)
   .patch(lessonsController.updateLessons);
 
-lessonsexports = router;
+  module.exports = router;
