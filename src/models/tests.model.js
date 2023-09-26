@@ -15,6 +15,10 @@ const Tests = db.define('tests', {
   content:{
     type: DataTypes.ARRAY(DataTypes.STRING),
     allowNull: false
+  },
+  moduleId:{
+    type: DataTypes.INTEGER,
+    allowNull: false
   }
 });
 
