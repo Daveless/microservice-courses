@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const { db } = require('../database/config');
 
-const Lessons = db.define('tests', {
+const Lessons = db.define('lessons', {
   id: {
     primaryKey: true,
     autoIncrement: true,
@@ -16,12 +16,16 @@ const Lessons = db.define('tests', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  content:{
-    type: DataTypes.STRING,
-    allowNull: false
+  content: {
+    type: DataTypes.ARRAY(DataTypes.STRING),
+    allowNull: false,
   },
   resources: {
     type: DataTypes.ARRAY(DataTypes.STRING),
+  },
+  moduleId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
   },
 });
 
