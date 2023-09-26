@@ -1,9 +1,9 @@
-const Course = require('../models/courses.model');
+const Courses = require('../models/courses.model');
 
 exports.createCourses = async (req, res, next) => {
   const { name, description, duration, tags } = req.body;
 
-  const newCourse = await Course.create({
+  const newCourse = await Courses.create({
     name,
     description,
     duration,
@@ -17,8 +17,8 @@ exports.createCourses = async (req, res, next) => {
 };
 
 exports.readCourses = async (req, res, next) => {
-  const courses = await Course.findAll({
-    where: { status: 'available' },
+  const courses = await Courses.findAll({
+    where: { status: 'active' },
   });
 
   res.status(200).json({
@@ -31,7 +31,7 @@ exports.readCourses = async (req, res, next) => {
 exports.readCoursesById = async (req, res, next) => {
   const { id } = req.params;
 
-  const currentCourse = await Course.findOne({
+  const currentCourse = await Courses.findOne({
     where: {
       id,
       status: 'available',
@@ -49,7 +49,7 @@ exports.updateCourses = async (req, res, next) => {
   const { id } = req.params;
   const { name } = req.body;
 
-  const currentCourse = await Course.findOne({
+  const currentCourse = await Courses.findOne({
     where: {
       id,
       status: 'available',
@@ -69,7 +69,7 @@ exports.updateCourses = async (req, res, next) => {
 exports.deleteCourses = async (req, res, next) => {
   const { id } = req.params;
 
-  const currentCourse = await Course.findOne({
+  const currentCourse = await Courses.findOne({
     where: {
       id,
       status: 'available',
