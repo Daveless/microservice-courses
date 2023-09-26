@@ -1,9 +1,8 @@
 const Lesson = require('../models/lessons.model');
 const Modules = require('../models/modules.model');
-const Tests = require('../models/tests.model');
 
 exports.createLessons = async (req, res, next) => {
-  const { title, description, content, resources } = req.body;
+  const { title, description, content, resources,moduleId } = req.body;
 
   try {
     const newLesson = await Lesson.create({
@@ -11,6 +10,7 @@ exports.createLessons = async (req, res, next) => {
       description,
       content,
       resources,
+      moduleId
     });
 
     res.status(200).json({
@@ -24,7 +24,7 @@ exports.createLessons = async (req, res, next) => {
 
 exports.readLessons = async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const { id } = req.query;
 
     const Lessons = await Modules.findByPk(id,{
         include: Lesson
@@ -36,10 +36,10 @@ exports.readLessons = async (req, res, next) => {
       res.status(200).json({
         message: 'Lessons found',
         results: Lessons.length,
-        Lessons,
+        Lesson:[Lessons.lessons],
       });
     } else {
-      res.status(400).json({ message: 'Lessons not found' });
+      res.status(404).json({ message: 'Lessons not found' });
     }
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -61,7 +61,7 @@ exports.readLessonsById = async (req, res, next) => {
         currentLesson,
       });
     } else {
-      res.status(400).json({ message: 'Lesson not found' });
+      res.status(404).json({ message: 'Lesson not found' });
     }
   } catch (error) {
     res.status(400).json({ message: error.message });
