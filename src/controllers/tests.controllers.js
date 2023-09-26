@@ -2,12 +2,13 @@ const Modules = require('../models/modules.model');
 const Test = require('../models/tests.model');
 
 exports.createTests = async (req, res, next) => {
-  const { description, content } = req.body;
+  const { description, content,moduleId } = req.body;
 
   try {
     const newTest = await Test.create({
       description,
       content,
+      moduleId
     });
 
     res.status(200).json({
@@ -21,7 +22,7 @@ exports.createTests = async (req, res, next) => {
 
 exports.readTests = async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const { id } = req.query;
 
     const tests = await Modules.findByPk(id,{
         include: Test
@@ -31,7 +32,7 @@ exports.readTests = async (req, res, next) => {
       res.status(200).json({
         message: 'Tests found',
         results: tests.length,
-        tests,
+        test:[tests.test],
       });
     } else {
       res.status(400).json({ message: 'Tests not found' });
