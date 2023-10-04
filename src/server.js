@@ -1,16 +1,22 @@
-require("dotenv").config();
-const app = require("./app");
-const { db } = require("./database/config");
+require('dotenv').config();
+const app = require('./app');
+const { db } = require('./database/config');
+const initModel = require('./models/initModels');
 
 db.authenticate()
-  .then(() => console.log("Database authenticated"))
+  .then(() => console.log('Database authenticated'))
   .catch((err) => console.log(err));
 
+initModel();
+
 db.sync()
-  .then(() => console.log("Database synchronized"))
+  .then(() => console.log('Database synchronized'))
   .catch((err) => console.log(err));
 
 const PORT = process.env.PORT;
+/* db.sync({ force: true }).then(() => {
+}); */
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}! 😎`);
 });
